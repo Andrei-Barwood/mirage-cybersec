@@ -1,0 +1,85 @@
+#!/usr/bin/env ruby
+require 'io/console'
+require 'fileutils'
+
+def colorize(text, color_code)
+  "\e[#{color_code}m#{text}\e[0m"
+end
+
+def red(text); colorize(text, 31); end
+def green(text); colorize(text, 32); end
+def yellow(text); colorize(text, 33); end
+def cyan(text); colorize(text, 36); end
+def bold(text); "\e[1m#{text}\e[0m"; end
+
+puts green("================================================================")
+puts green("ALAMUT OS v9.8 :: TERMINAL DE AUDITORÍA GLOBAL E INTERACTIVA")
+puts green("OPERADORES: Roshan bint-La'Ahad & Basim Ibn Ishaq")
+puts green("COBERTURA: 108 Operaciones Canónicas (Daughter of No One + AC Mirage)")
+puts green("================================================================")
+puts yellow("Presione ENTER para iniciar la auditoría profunda de los 108 sectores...")
+STDIN.gets if STDIN.tty?
+
+total_eps = 108
+passed = 0
+failed = 0
+missing = 0
+
+(1..total_eps).each do |i|
+  ep = i.to_s.rjust(2, '0')
+  test_file = File.expand_path("../test/episodios/ep#{ep}_test.rb", __dir__)
+  prompt_file = File.expand_path("../prompts/ep#{ep}_prompt.md", __dir__)
+  
+  saga = i <= 54 ? "[DAUGHTER OF NO ONE]" : "[AC MIRAGE]"
+  puts cyan("\n>>> INICIANDO ANÁLISIS DE SECTOR: EP#{ep} #{saga} <<<")
+  
+  if File.exist?(prompt_file)
+    content = File.read(prompt_file)
+    title = content.match(/# (.*)/)&.captures&.first || "DESCONOCIDO"
+    threat = content.match(/\*\*Actor Hostil.*:\*\*\s*(.*)/)&.captures&.first || "N/A"
+    vector = content.match(/\*\*Vector de Ataque.*:\*\*\s*(.*)/)&.captures&.first || "N/A"
+    
+    puts green("[*] Operación: #{title}")
+    puts yellow("[*] Actor Hostil: #{threat}")
+    puts yellow("[*] Vector Técnico: #{vector}")
+  else
+    puts red("[!] ADVERTENCIA: Prompt no encontrado en prompts/ep#{ep}_prompt.md")
+  end
+  
+  puts cyan("[*] Verificando suites de contramedidas en Minitest...")
+  
+  if File.exist?(test_file)
+    output = `ruby -I #{File.expand_path('../lib', __dir__)} #{test_file} 2>&1`
+    if $?.success?
+      puts green("[+] RESULTADO: CONTRAMEDIDA EXITOSA. NODO ASEGURADO.")
+      last_lines = output.lines.last(2).join.strip
+      puts "    > #{last_lines}"
+      passed += 1
+    else
+      puts red("[-] RESULTADO: BRECHA DETECTADA. FALLO EN LA CONTRAMEDIDA.")
+      puts red(output)
+      failed += 1
+    end
+  else
+    puts red("[-] RESULTADO: SECTOR INDEFENSO. Test unitario faltante.")
+    missing += 1
+  end
+  
+  puts cyan("----------------------------------------------------------------")
+  sleep 0.02
+end
+
+puts "\n"
+puts green("================================================================")
+puts green("REPORTE FINAL DE AUDITORÍA DE ALAMUT (108 SECTORES)")
+puts green("================================================================")
+puts "Sectores Neutralizados y Seguros: #{green(passed.to_s)} / #{total_eps}"
+puts "Brechas de Seguridad Activas:     #{red(failed.to_s)}"
+puts "Sectores Sin Contramedidas:       #{yellow(missing.to_s)}"
+puts green("================================================================")
+if failed == 0 && missing == 0
+  puts bold(green("DICTAMEN: INTEGRIDAD DEL CREDO CONFIRMADA AL 100%."))
+else
+  puts bold(red("DICTAMEN: SE REQUIERE INTERVENCIÓN INMEDIATA EN SECTORES VULNERABLES."))
+end
+puts green("================================================================")

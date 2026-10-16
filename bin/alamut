@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+require 'bundler/setup'
+$LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
+
+require 'alamut_web/app'
+
+puts "========================================================================"
+puts "[ALAMUT OS v9.8] INICIANDO SERVIDOR WEB ANIMUS CORE (PORT 9200)"
+puts "========================================================================"
+puts "Operadores: Roshan bint-La'Ahad & Basim Ibn Ishaq"
+puts "Sectores cargados: 108 Operaciones (Daughter of No One + AC Mirage)"
+puts "Enlace local disponible en: http://localhost:9200"
+puts "========================================================================"
+
+AlamutWeb::App.run!

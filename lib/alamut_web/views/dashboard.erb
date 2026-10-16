@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Alamut OS v9.8 :: Animus Core & Cybersec Matrix</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="creed-crest">🦅</span> 
+                <div>
+                    <h1>ALAMUT OS v9.8 // ANIMUS CORE</h1>
+                    <div style="font-size:0.75rem; color:var(--text-muted); letter-spacing:1px;">CYBERSEC OFENSIVA & THREAT INTELLIGENCE (108 SECTORES)</div>
+                </div>
+            </div>
+            <div class="status-bar">
+                <span>ENLACE ANIMUS: <strong class="badge-stable">SINCRONIZADO</strong></span>
+                <button id="btn-master-dossier" class="btn btn-gold">DOSSIER DAUGHTER OF NO ONE</button>
+                <a href="/system_report" class="btn btn-crimson" target="_blank">AUDITORÍA GLOBAL (108 EPS)</a>
+            </div>
+        </header>
+
+        <main>
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2>SECTORES DE MEMORIA</h2>
+                    <p class="sub">108 Operaciones Canónicas</p>
+                </div>
+
+                <div class="saga-section">Saga I: Daughter of No One (Eps 01-54)</div>
+                <ul id="daughter-list">
+                    <% @episodes.each do |ep| %>
+                        <% if ep.to_i <= 54 %>
+                            <li><a href="#" class="ep-link" data-ep="<%= ep %>">Op <%= ep.rjust(2, '0') %>: Roshan Origin</a></li>
+                        <% end %>
+                    <% end %>
+                </ul>
+
+                <div class="saga-section mirage">Saga II: AC Mirage (Eps 55-108)</div>
+                <ul id="mirage-list">
+                    <% @episodes.each do |ep| %>
+                        <% if ep.to_i > 54 %>
+                            <li><a href="#" class="ep-link" data-ep="<%= ep %>">Op <%= ep.rjust(2, '0') %>: Basim & The Order</a></li>
+                        <% end %>
+                    <% end %>
+                </ul>
+            </aside>
+
+            <section class="content">
+                <div class="panel">
+                    <div class="console-header">
+                        <h2>Análisis Táctico y Memoria del Animus</h2>
+                        <a id="export-pdf" href="#" class="btn btn-gold" style="display:none;" target="_blank">EXPORTAR DOSSIER PDF</a>
+                    </div>
+                    <div id="prompt-container" class="markdown-body">
+                        <p>Selecciona una operación de la barra lateral o presiona <strong>DOSSIER DAUGHTER OF NO ONE</strong> para cargar la memoria histórica completa.</p>
+                    </div>
+                </div>
+                
+                <div class="panel console-panel">
+                    <div class="console-header">
+                        <h2>Terminal de Ejecución Minitest (Alamut Engine)</h2>
+                        <button id="run-test" class="btn" disabled>EJECUTAR CONTRAMEDIDA</button>
+                    </div>
+                    <pre id="console-output" class="console">Alamut OS listo. Esperando selección de sector...</pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        let currentEpisode = null;
+
+        // Cargar Dossier Maestro
+        document.getElementById('btn-master-dossier').addEventListener('click', async (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.ep-link').forEach(l => l.classList.remove('active'));
+            currentEpisode = null;
+            document.getElementById('run-test').disabled = true;
+            document.getElementById('export-pdf').style.display = 'none';
+
+            const container = document.getElementById('prompt-container');
+            container.innerHTML = "<p>Extrayendo Dossier Maestro de Daughter of No One...</p>";
+
+            try {
+                const res = await fetch('/dossier_daughter_of_no_one');
+                const data = await res.json();
+                container.innerHTML = data.html;
+                document.getElementById('console-output').innerText = "Dossier Maestro cargado. Revisa la matriz completa de operaciones de Roshan.";
+            } catch(err) {
+                container.innerHTML = "<p>Error al cargar el Dossier Maestro.</p>";
+            }
+        });
+
+        // Clic en Episodio
+        document.querySelectorAll('.ep-link').forEach(link => {
+            link.addEventListener('click', async (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.ep-link').forEach(l => l.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+                
+                currentEpisode = e.currentTarget.dataset.ep;
+                document.getElementById('run-test').disabled = false;
+                
+                const pdfBtn = document.getElementById('export-pdf');
+                pdfBtn.style.display = 'inline-flex';
+                pdfBtn.href = '/pdf/' + currentEpisode;
+                
+                // Fetch prompt
+                document.getElementById('prompt-container').innerHTML = "<p>Decodificando sincronización del Animus para Op " + currentEpisode + "...</p>";
+                try {
+                    const res = await fetch('/prompt/' + currentEpisode);
+                    const data = await res.json();
+                    document.getElementById('prompt-container').innerHTML = data.html;
+                } catch(e) {
+                    document.getElementById('prompt-container').innerHTML = "<p>Error al decodificar memoria.</p>";
+                }
+                
+                document.getElementById('console-output').innerText = "Sector EP" + currentEpisode + " cargado. Presiona 'EJECUTAR CONTRAMEDIDA' para probar mitigación Minitest.";
+            });
+        });
+
+        // Ejecutar Test
+        document.getElementById('run-test').addEventListener('click', async () => {
+            if(!currentEpisode) return;
+            const consoleOut = document.getElementById('console-output');
+            consoleOut.innerText = "Iniciando suites de contramedidas en sector EP" + currentEpisode + "... Por favor espere.";
+            
+            try {
+                const res = await fetch('/run/' + currentEpisode, { method: 'POST' });
+                const data = await res.json();
+                consoleOut.innerText = data.output;
+                if(data.exit_code === 0) {
+                    consoleOut.classList.add('success');
+                    consoleOut.classList.remove('error');
+                } else {
+                    consoleOut.classList.add('error');
+                    consoleOut.classList.remove('success');
+                }
+            } catch (e) {
+                consoleOut.innerText = "Error ejecutando la prueba en el sector.";
+            }
+        });
+    </script>
+</body>
+</html>
