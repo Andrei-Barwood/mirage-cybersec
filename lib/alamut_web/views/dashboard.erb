@@ -18,6 +18,7 @@
             <div class="status-bar">
                 <span>ENLACE ANIMUS: <strong class="badge-stable">SINCRONIZADO</strong></span>
                 <button id="btn-master-dossier" class="btn btn-gold">DOSSIER DAUGHTER OF NO ONE</button>
+                <button id="btn-spoilers" class="btn btn-crimson">⚠️ SPOILERS Y MITIGACIONES</button>
                 <a href="/system_report" class="btn btn-crimson" target="_blank">AUDITORÍA GLOBAL (108 EPS)</a>
             </div>
         </header>
@@ -91,6 +92,27 @@
                 document.getElementById('console-output').innerText = "Dossier Maestro cargado. Revisa la matriz completa de operaciones de Roshan.";
             } catch(err) {
                 container.innerHTML = "<p>Error al cargar el Dossier Maestro.</p>";
+            }
+        });
+
+        // Cargar Spoilers y Mitigaciones
+        document.getElementById('btn-spoilers').addEventListener('click', async (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.ep-link').forEach(l => l.classList.remove('active'));
+            currentEpisode = null;
+            document.getElementById('run-test').disabled = true;
+            document.getElementById('export-pdf').style.display = 'none';
+
+            const container = document.getElementById('prompt-container');
+            container.innerHTML = "<p>Desclasificando Spoilers y Matriz de Mitigaciones...</p>";
+
+            try {
+                const res = await fetch('/spoilers');
+                const data = await res.json();
+                container.innerHTML = data.html;
+                document.getElementById('console-output').innerText = "Matriz de Spoilers y Mitigaciones cargada con éxito. Lectura de máxima severidad.";
+            } catch(err) {
+                container.innerHTML = "<p>Error al cargar el informe de Spoilers.</p>";
             }
         });
 

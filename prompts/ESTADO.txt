@@ -6,6 +6,6 @@ secciones_totales: 5
 seccion_completada: 5
 seccion_siguiente: terminada
 estado: serie_completada_108_episodios
-ultima_entrega: Generación exhaustiva de 108 incidentes (Daughter of No One + AC Mirage) con módulos ejecutables, pruebas Minitest, interfaz Alamut OS y exportador PDF.
-ultima_nota: Sistema compilado con suite completa de 108 escenarios, reporte maestro de Daughter of No One y arquitectura de red de Los Ocultos.
+ultima_entrega: Integración de la sección de spoilers completos y guía táctica de mitigación (Nehal, Genio Isu, Orden de los Antiguos, cisma de Roshan y despertar de Loki).
+ultima_nota: Sistema compilado con 108 escenarios, dossier maestro Daughter of No One, informe táctico de spoilers y Web GUI interactiva.
 bloqueadores: ninguno

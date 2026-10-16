@@ -102,6 +102,19 @@ module AlamutWeb
       end
     end
 
+    get '/spoilers' do
+      file_path = File.expand_path("../../prompts/SPOILERS_Y_MITIGACIONES_CANONICAS.md", __dir__)
+      if File.exist?(file_path)
+        content = File.read(file_path)
+        html = Kramdown::Document.new(content).to_html
+        content_type :json
+        { html: html }.to_json
+      else
+        content_type :json
+        { html: "<h2>Dossier de Spoilers no encontrado.</h2>" }.to_json
+      end
+    end
+
     get '/pdf/:episode' do
       ep = params[:episode].to_s.rjust(2, '0')
       pdf_data = AlamutWeb::EpisodeReportGenerator.generate(ep)

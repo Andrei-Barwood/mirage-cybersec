@@ -21,6 +21,7 @@ Aquí no hay ficción inejecutable ni texto de adorno: cada operación cuenta co
 4. [Ejecución por Consola y Auditoría Global (CLI)](#ejecución-por-consola-cli)
 5. [Dossier Maestro de Daughter of No One](#dossier-maestro-de-daughter-of-no-one)
 6. [Mapeo de Conceptos (Ejemplos)](#mapeo-de-conceptos-ejemplos)
+7. [⚠️ Zona de Spoilers Completos y Mitigaciones Tácticas](#️-zona-de-spoilers-completos-y-mitigaciones-tácticas)
 
 ---
 
@@ -154,3 +155,44 @@ En `prompts/00_DAUGHTER_OF_NO_ONE_PROMPTS_MASTER.md` se encuentra el documento r
 - **Episodio 58 (El Disco de Memoria Isu en Anbar):** *Memory Decryption & Glitch Analysis.* Basim y Nehal extraen bloques cifrados de la Primera Civilización detonando un desbordamiento de búfer neural.
 - **Episodio 77 (Asesinato de Al-Ghul en el Caravasar):** *Targeted Memory Termination.* Infiltración perimetral y purga del proceso de trata de esclavos de la Orden de los Antiguos.
 - **Episodio 108 (El Espejo de Loki):** *Neural Memory Integration & Transcendence.* Integración de los recuerdos reprimidos de Loki y ascensión definitiva como Maestro de Los Ocultos.
+
+---
+
+## ⚠️ Zona de Spoilers Completos y Mitigaciones Tácticas
+
+> [!WARNING]
+> **ALERTA DE DESCLASIFICACIÓN NIVEL ISU // SPOILERS TOTALES DE LA TRAMA**  
+> Para consultar el informe técnico pormenorizado, revisa [**`prompts/SPOILERS_Y_MITIGACIONES_CANONICAS.md`**](prompts/SPOILERS_Y_MITIGACIONES_CANONICAS.md). A continuación se resumen los giros cardinales y cómo contrarrestar cada amenaza tanto en el videojuego como en la arquitectura de red.
+
+### 1. La Verdad sobre Nehal (Split-Brain Neural y Alucinación del Kernel)
+- **El Giro:** Nehal **no existe como persona real** durante los hechos de *Mirage*. Es una alucinación disociativa generada por la mente de Basim para albergar su identidad reprimida de la Primera Civilización (**Loki**). Cuando Nehal degüella al Califa Al-Mutawakkil, fue la mano de Basim la que asestó el golpe.
+- **Analogía Cybersec:** *Split-Brain Neural Host / Insecure Kernel Multi-Threading.* Un proceso fantasma en Ring-0 ejecuta código sin validación creyendo que interactúa con un peer externo.
+- **Mitigación en Juego:** Reconocer los momentos de desconexión social de Nehal, sincronizar los Fragmentos Misteriosos en el Oasis Norte y aceptar la unificación de memorias en la cripta de Alamut sin combatir la revelación.
+- **Mitigación en Código:** Colector de memoria cuántico (`NeuralMemoryIntegration`) que suprime la máquina virtual disociativa y fusiona los PIDs en un único espacio de direccionamiento (`ep108_loki_awakening.rb`).
+
+### 2. El Enigma del Genio Alado (Al-Jinn)
+- **El Giro:** El Genio que atormenta los sueños de Basim no es un demonio sobrenatural, sino el **recuerdo traumático de la tortura y aprisionamiento de Loki a manos de Odín (Havi)** en el templo precursor.
+- **Analogía Cybersec:** *Corrupted Exception Handler / Persistent Trauma Firmware Loop.* Bucle de interrupciones que satura el microcódigo de arranque durante los estados de reposo (`SIGTRAP_PRECURSOR`).
+- **Mitigación en Juego:** En la confrontación final bajo Alamut, **no atacar al Genio**. Avanzar desarmado hacia la entidad para que se disuelva en la figura de Nehal sosteniendo el artefacto Isu.
+- **Mitigación en Código:** Capturador de excepciones anómalas que desenrolla la pila (`StackUnwinding`) y neutraliza el Kernel Panic cíclico (`ep59_nightmare_of_the_jinni.rb`).
+
+### 3. La Cacería de la Orden de los Antiguos en Bagdad
+- **Al-Ghul (Mas'ood):** Esclavista y minero de reliquias en Harbiyah.  
+  *Mitigación:* Liberar a los prisioneros en el taller de jabón, conseguir la moneda de hierro de los mercaderes y ejecutar un asesinato aéreo silencioso desde las vigas del Caravasar. (`ep77_assassinating_mas_ood_al_ghul.rb`).
+- **Al-Rabisu (Zahra):** Erudita torturadora en la Casa de la Sabiduría que experimenta con frecuencias acústicas y drogas.  
+  *Mitigación:* Descifrar el poema astronómico en su sanctasanctórum, purgar los registros de pruebas y tenderle una emboscada con bombas de humo durante el Gran Simposio. (`ep85_assassinating_zahra_al_rabisu.rb`).
+- **Al-Khasib (Ning):** Tesorera de Karkh que extorsiona mercaderes y acapara reliquias en subastas cerradas.  
+  *Mitigación:* Sustraer el salvoconducto de marfil chino, pujar de forma encubierta en la subasta del bazar e infiltrarse en su cámara privada por los conductos superiores. (`ep93_assassinating_ning_al_khasib.rb`).
+- **Al-Kurh (Wasif):** General turco que militariza la Ciudad Redonda y secuestra la justicia califal.  
+  *Mitigación:* Sabotear los suministros de aceite hirviendo del cuartel, infiltrarse con los rebeldes de Ali y ejecutar el SIGKILL del C2 maestro. (`ep100_assassinating_general_wasif_al_kurh.rb`).
+- **Al-Pairika (Qabiha):** La madre del heredero imperial y cabeza suprema de la Orden.  
+  *Mitigación:* Infiltrarse en los baños termales del harén y penetrar la cámara imperial. Es ejecutada desde las sombras por Roshan antes de que revele el origen Isu de Basim. (`ep104_roshan_s_shadow_strike_on_qabiha.rb`).
+
+### 4. El Conflicto con la Maestra Roshan
+- **El Giro:** Roshan **no es una traidora**, sino una celosa guardiana del Credo que prefiere la *Seguridad por Oscuridad*. Al saber que Basim es la reencarnación de un dios antiguo, intenta matarlo en las murallas de Alamut para impedir que abra la cripta precursora.
+- **Mitigación en Juego:** En el combate de jefes, esquivar lateralmente sus ataques rojos imparables, aturdirla con cuchillos envenenados a distancia media y pararla cuando destelle en amarillo. Basim la derrota pero le perdona la vida. (`ep106_duel_on_the_ramparts_basim_vs_roshan.rb`).
+
+### 5. El Despertar de Loki y la Ruptura con Enkidu
+- **El Giro:** Al ingresar a la cámara Isu bajo Alamut, Nehal y Basim se funden. Basim recupera su identidad original: **Loki renacido**. Su águila **Enkidu lo ataca y huye**, reconociendo que el muchacho humano ha muerto y ahora una deidad predatoria camina en su piel. Basim toma el mando de Los Ocultos para vengarse de los Aesir.
+- **Mitigación en Código:** Políticas de contención ética donde el Credo de Los Ocultos actúa como el WAF moral que canaliza la inmortalidad de Loki al servicio de la justicia terrenal (`ep108_the_mirror_of_loki_nehal_s_awakening.rb`).
+
